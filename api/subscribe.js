@@ -97,7 +97,14 @@ export default async function handler(req, res) {
       });
     }
 
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({
+  ok: true,
+  email,
+  persona: persona || "unknown",
+  source: source || "unknown",
+  ...(Number.isFinite(listId) ? { listId } : {})
+});
+
   } catch (e) {
     return res.status(500).json({ ok: false, error: "network_error" });
   }
