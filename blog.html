@@ -610,7 +610,7 @@
         </p>
 
         <div class="hero-disclaimer">
-          The Term "Etsy" is a trademark of Etsy, Inc. FindNext is an independent service and is not endorsed or certified by Etsy.
+          The term "Etsy" is a trademark of Etsy, Inc. FindNext is an independent service and is not endorsed or certified by Etsy.
         </div>
 
         <div class="signup-wrap">
@@ -1098,76 +1098,84 @@
       }
 
 
-    async function submitLead(e, source){
-      e.preventDefault();
-      const input = e.target.querySelector('input[type=email]');
-      const email = (input?.value || '').trim();
-      const persona = (e.target.querySelector('input[name="persona"]')?.value || 'consumer').trim() || 'consumer';
+    function submitLead(e, source) {
+        e.preventDefault();
 
-      fnLog('submitLead', { source, persona, email });
-      
-      const accept = e.target.querySelector('.accept-box');
-      if(accept && !accept.checked){
-        alert('Please accept the Terms and Privacy Policy to continue.');
-        accept.focus();
-        return false;
-      }
+        const input = e.target.querySelector('input[type=email]');
+        const email = (input?.value || '').trim();
+        const persona = (e.target.querySelector('input[name="persona"]')?.value || 'consumer').trim() || 'consumer';
 
-      if(!validEmail(email)){
-        alert('Please enter a valid email');
-        if(input) input.focus();
-        return false;
-      }
-      // ---- Cool-down: prevent rapid double submits (per email + source) ----
+        fnLog('submitLead', { source, persona, email });
+
+        const accept = e.target.querySelector('.accept-box');
+        if (accept && !accept.checked) {
+          alert('Please accept the Terms and Privacy Policy to continue.');
+          accept.focus();
+          return false;
+        }
+
+        if (!validEmail(email)) {
+          alert('Please enter a valid email');
+          if (input) input.focus();
+          return false;
+        }
+
+        // ---- Cool-down: prevent rapid double submits (per email + source) ----
         const CD_MS = 5000; // 5s
         const cdKey = 'fn_submit_cd_' + source + '_' + btoa(unescape(encodeURIComponent(String(email).toLowerCase()))).slice(0, 80);
 
         try {
-            const last = parseInt(sessionStorage.getItem(cdKey) || '0', 10);
-            if (last && (Date.now() - last) < CD_MS) {
-                const wait = Math.ceil((CD_MS - (Date.now() - last)) / 1000);
-                showToast(
-                    '<div style="font-weight:800;margin-bottom:8px">One moment</div>' +
-                    '<div style="color:#cbd5e1">Please wait ' + wait + 's before submitting again.</div>'
-                );
-                return false;
-            }
-            sessionStorage.setItem(cdKey, String(Date.now()));
+          const last = parseInt(sessionStorage.getItem(cdKey) || '0', 10);
+          if (last && (Date.now() - last) < CD_MS) {
+            const wait = Math.ceil((CD_MS - (Date.now() - last)) / 1000);
+            showToast(
+              '<div style="font-weight:800;margin-bottom:8px">One moment</div>' +
+              '<div style="color:#cbd5e1">Please wait ' + wait + 's before submitting again.</div>'
+            );
+            return false;
+          }
+          sessionStorage.setItem(cdKey, String(Date.now()));
         } catch (err) {
-            // If sessionStorage is blocked, fail open (do not block submissions)
+          // If sessionStorage is blocked, fail open
         }
 
+        // UI feedback (do this immediately, and let the browser paint)
+        const btn = e.target.querySelector('button[type="submit"]');
+        const btnLabel = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
 
-      // UI feedback
-      const btn = e.target.querySelector('button[type="submit"]');
-      const btnLabel = btn ? btn.textContent : '';
-      if(btn){ btn.disabled=true; btn.textContent='Submitting…'; }
-
-      // optimistic toast
-      // optimistic toast + reset form (clears email + unchecks Terms)
+        // optimistic toast + reset form
         try { e.target.reset(); } catch (err) { }
-
-        // extra safety: ensure terms checkbox is cleared (some browsers/forms can be quirky)
         const acceptBox = e.target.querySelector('.accept-box');
         if (acceptBox) acceptBox.checked = false;
 
         showToast(
-            '<div style="font-weight:800;font-size:1.1rem;margin-bottom:10px">Welcome to FindNext</div>' +
-            '<div style="color:#cbd5e1">You’re on the waitlist. We’ll email you when FindNext launches with your first trend insights.</div>'
+          '<div style="font-weight:800;font-size:1.1rem;margin-bottom:10px">Welcome to FindNext</div>' +
+          '<div style="color:#cbd5e1">You’re on the waitlist. We’ll email you when FindNext launches with your first trend insights.</div>'
         );
 
+        // IMPORTANT: do NOT await network in the handler (fixes INP)
+        setTimeout(() => {
+          postLead(email, source, persona)
+            .then((result) => {
+              if (!result?.ok) {
+                console.warn('Lead capture failed:', result);
+                try { sessionStorage.removeItem(cdKey); } catch (e) { }
+                // Keep failure quiet for approval build
+              }
+            })
+            .catch((err) => {
+              console.warn('Lead capture failed:', err);
+              try { sessionStorage.removeItem(cdKey); } catch (e) { }
+            })
+            .finally(() => {
+              if (btn) { btn.disabled = false; btn.textContent = btnLabel || 'Join the waitlist'; }
+            });
+        }, 0);
 
-      const result = await postLead(email, source, persona);
-      if(!result?.ok){
-        console.warn('Lead capture failed:', result);
-        try { sessionStorage.removeItem(cdKey); } catch (e) { }
-
-        // Keep this soft for approval—no scary error modal.
+        return false;
       }
 
-      if(btn){ btn.disabled=false; btn.textContent = btnLabel || 'Join the waitlist'; }
-      return false;
-    }
 
     // global exports
     window.openPost = openPost;
@@ -1179,5 +1187,3 @@
   </script>
 </body>
 </html>
-
-
