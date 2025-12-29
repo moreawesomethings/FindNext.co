@@ -429,6 +429,24 @@
         
 
         /* KPIs (kept, but now phrased as features rather than unverified metrics) */
+        /* KPI grid: prevent mobile overflow */
+.kpis{ min-width:0; }
+.kpi{ min-width:0; } /* allow grid items to shrink */
+
+@media (max-width: 520px){
+  .kpis{
+    grid-template-columns: 1fr; /* stack */
+  }
+}
+@media (min-width: 521px) and (max-width: 900px){
+  .kpis{
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2-up */
+  }
+  .kpis .kpi:last-child{
+    grid-column: 1 / -1; /* make the 3rd span full width */
+  }
+}
+
         .kpis {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -2487,6 +2505,7 @@
 
 
 </html>
+
 
 
 
