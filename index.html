@@ -429,6 +429,23 @@
         
 
         /* KPIs (kept, but now phrased as features rather than unverified metrics) */
+        /* Prevent KPI text/content overflow */
+.kpi{
+  min-width: 0;
+  overflow: hidden;            /* safety */
+}
+
+.kpi b,
+.kpi small,
+.kpi span,
+.kpi div{
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;     /* breaks long tokens if needed */
+  word-break: normal;      /* fallback */
+}
+
         /* KPI grid: prevent mobile overflow */
 .kpis{ min-width:0; }
 .kpi{ min-width:0; } /* allow grid items to shrink */
@@ -2505,6 +2522,7 @@
 
 
 </html>
+
 
 
 
