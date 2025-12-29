@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FindNext Blog — Transparency, Methodology & Pre-MVP Updates</title>
   <meta name="description" content="FindNext blog: how it works (pre-MVP), transparency & disclosures, and launch updates." />
-  <link rel="canonical" href="https://findnext.co/blog/" />
+  <link rel="canonical" href="https://findnext.co/blog.html" />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#3B82F6" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="FindNext Blog — Transparency, Methodology & Pre-MVP Updates" />
   <meta property="og:description" content="How FindNext works (pre-MVP), our transparency commitments, and launch updates." />
-  <meta property="og:url" content="https://findnext.co/blog/" />
+  <meta property="og:url" content="https://findnext.co/blog.html" />
   <meta property="og:image" content="https://findnext.co/og.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -32,14 +32,47 @@
     html,body{height:100%;margin:0;padding:0}
     *{box-sizing:border-box}
     body{
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(59,130,246,.25), transparent),
-        radial-gradient(1000px 500px at 80% 10%, rgba(34,197,94,.20), transparent),
-        linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
-      color:#fff;
-      line-height:1.5;
-    }
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color:#fff;
+  line-height:1.5;
+
+  background-color:#0b1220;
+
+  /* Seam-free: fade to transparent base color, not 'transparent' */
+  background-image:
+    /* Blue glow (top-left) */
+    radial-gradient(70vw 55vh at 18% -10%,
+      rgba(59,130,246,0.26) 0%,
+      rgba(11,18,32,0) 62%,
+      rgba(11,18,32,0) 100%),
+
+    /* Green glow (upper-right) */
+    radial-gradient(70vw 55vh at 85% 8%,
+      rgba(34,197,94,0.20) 0%,
+      rgba(11,18,32,0) 64%,
+      rgba(11,18,32,0) 100%),
+
+    /* Subtle green/teal wash (mid-left) */
+    radial-gradient(75vw 60vh at 20% 60%,
+      rgba(34,197,94,0.10) 0%,
+      rgba(11,18,32,0) 70%,
+      rgba(11,18,32,0) 100%),
+
+    /* Blue wash (bottom-right) */
+    radial-gradient(80vw 65vh at 85% 92%,
+      rgba(59,130,246,0.12) 0%,
+      rgba(11,18,32,0) 72%,
+      rgba(11,18,32,0) 100%),
+
+    /* Base */
+    linear-gradient(180deg,
+      #0b1220 0%,
+      #0c1426 45%,
+      #0f172a 100%);
+
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+}
     a{color:#93c5fd;text-decoration:none}
     a:hover{text-decoration:underline}
     .container{max-width:var(--content-width);margin:0 auto;padding:0 16px}
@@ -240,6 +273,69 @@
       font-size:18px; cursor:pointer; opacity:.85;
     }
     .toast-close:hover{opacity:1}
+
+    /* Legal Modal */
+        .legal-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            place-items: center;
+            background: rgba(2, 6, 23, .72);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+        }
+
+        .legal-content {
+            position: relative;
+            width: min(720px, calc(100% - 32px));
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            background: linear-gradient(180deg, #0b1220, #0f172a);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 18px;
+            padding: 24px;
+            color: #e5e7eb;
+        }
+
+        .legal-content h3 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .legal-content h4 {
+            margin: 20px 0 10px;
+            font-size: 18px;
+            color: #93c5fd;
+        }
+
+        .legal-content p,
+        .legal-content li {
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .legal-content ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+
+        .legal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #cbd5e1;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: .8;
+            transition: opacity .2s ease;
+        }
+
+        .legal-close:hover {
+            opacity: 1;
+        }
 
     /* Modal */
     .modal{
@@ -486,7 +582,7 @@
             </defs>
           </svg>
         </div>
-        <a href="../index.html" style="color:#fff;text-decoration:none">FindNext</a>
+        <a href="/" style="color:#fff;text-decoration:none">FindNext</a>
       </div>
 
       
@@ -510,7 +606,7 @@
 
         <h1 class="h1">FindNext Blog</h1>
         <p class="lede">
-          Clear, approval-safe documentation on how FindNext works (pre-MVP), what we do and do not do, and what to expect at launch.
+          Clear documentation on how FindNext works (pre-MVP), what we do and do not do, and what to expect at launch.
         </p>
 
         <div class="hero-disclaimer">
@@ -597,15 +693,13 @@
     </div>
   </div>
 
-  <!-- Legal Modal (simple, approval-safe) -->
-  <div id="legalModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="legalTitle" aria-hidden="true">
-    <div class="sheet">
-      <button aria-label="Close" class="closex" onclick="closeLegal()">×</button>
-      <div class="post-header">
-        <div class="blog-meta">Policy</div>
-        <h2 class="post-h2" id="legalTitle">Title</h2>
-      </div>
-      <div class="post-body" id="legalBody"></div>
+  <!-- Legal Modal -->
+  <div id="legalModal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legalTitle"
+    aria-hidden="true">
+    <div class="legal-content">
+      <button aria-label="Close" class="legal-close" onclick="closeLegal()">×</button>
+      <div id="legalTitle"></div>
+      <div id="legalBody"></div>
     </div>
   </div>
 
@@ -683,7 +777,9 @@
         title: "How FindNext identifies emerging handmade trends",
         sub: "Last updated: December 2025",
         body: `
-          <p>
+        <p><strong>Data note:</strong> We do not access private Etsy user data or non-public Etsy APIs in this pre-MVP experience.</p>
+  
+        <p>
             FindNext is a <strong>pre-MVP discovery service</strong> designed to surface emerging handmade and creative themes.
             Our goal is to help shoppers and makers understand what’s gaining traction <em>without</em> paid amplification or confusing endorsements.
           </p>
@@ -761,9 +857,10 @@
         sub: "Last updated: December 2025",
         body: `
           <p>
-            This is an early release intended to support marketplace partner review and to begin building the waitlist.
-            We’re keeping the surface area small and transparent.
-          </p>
+  This is an early release intended to support platform review (including API access evaluation) and to begin building the waitlist.
+  We’re keeping the surface area small and transparent.
+</p>
+
 
           <h3>What’s live now</h3>
           <ul>
@@ -792,36 +889,75 @@
       }
     };
 
-    const LEGAL = {
-      disclosure: {
-        title: "Affiliate Disclosure",
-        body: `
-          <p><strong>FindNext participates in affiliate marketing programs</strong> and may earn commissions from qualifying purchases made through our links.</p>
-          <p><strong>Editorial independence:</strong> Our recommendations are based on publicly observable signals and editorial judgment, not affiliate earnings potential.</p>
-          <p><strong>Independence:</strong> FindNext is an independent service and is not affiliated with or endorsed by Etsy. Etsy is a trademark of Etsy, Inc.</p>
-        `
-      },
-      privacy: {
-        title: "Privacy Policy (Summary)",
-        body: `
-          <p><strong>Last Updated:</strong> December 2025</p>
-          <p><strong>What we collect:</strong> your email if you join the waitlist. Basic technical usage data only if you enable analytics cookies.</p>
-          <p><strong>Cookies:</strong> necessary cookies for site functionality; analytics cookies only with consent; marketing cookies are not implemented.</p>
-          <p><strong>Your choices:</strong> you can manage analytics consent anytime via Cookie Preferences.</p>
-          <p><strong>Contact:</strong> hello@findnext.co • privacy@findnext.co</p>
-        `
-      },
-      terms: {
-        title: "Terms of Service (Summary)",
-        body: `
-          <p><strong>Last Updated:</strong> December 2025</p>
-          <p>FindNext provides informational content related to product discovery and trends. Content is for general information only.</p>
-          <p><strong>No guarantees:</strong> we do not guarantee accuracy of predictions, availability of products, pricing, or outcomes.</p>
-          <p><strong>Independence disclaimer:</strong> Etsy, Inc. is not the application developer and makes no warranties with respect to this service.</p>
-          <p><strong>Contact:</strong> hello@findnext.co</p>
-        `
-      }
-    };
+    // Legal content
+      const legalContent = {
+        disclosure: {
+          title: "Affiliate Disclosure",
+          content:
+            "<h4>Affiliate Relationships</h4>" +
+            "<p>FindNext participates in affiliate marketing programs and may earn commissions from qualifying purchases made through our links. This may include marketplace affiliate programs and other merchant programs.</p>" +
+            "<h4>Independence</h4>" +
+            "<p>FindNext is an independent service and is not affiliated with or endorsed by Etsy. Any trademarks are the property of their respective owners.</p>" +
+            "<h4>Editorial Independence</h4>" +
+            "<p>Our recommendations are based on data analysis and editorial judgment, not affiliate earnings potential. Affiliate relationships do not influence our trend analysis or rankings.</p>" +
+            "<h4>Transparency</h4>" +
+            "<p>When you click affiliate links and make purchases, we may earn a small commission at no extra cost to you. This helps support our free service.</p>" +
+            "<h4>FTC Compliance</h4>" +
+            "<p>This disclosure is intended to comply with FTC guidelines on endorsements and testimonials in advertising.</p>"
+        },
+
+        privacy: {
+          title: "Privacy Policy",
+          content:
+            "<p><strong>Last Updated:</strong> December 16, 2025</p>" +
+            "<h4>1. Controller</h4><p>FindNext (“we”, “us”) is the controller for personal data processed via this website. Contact: hello@findnext.co. Privacy requests: privacy@findnext.co.</p>" +
+            "<h4>2. What We Collect</h4>" +
+            "<p><strong>Email address:</strong> when you join early access.</p>" +
+            "<p><strong>Basic technical data:</strong> device/browser information and limited usage data (only if analytics is enabled with your consent).</p>" +
+            "<p><strong>Cookies:</strong> essential cookies for site functionality; analytics cookies only with your consent; marketing cookies are not implemented.</p>" +
+            "<h4>3. Purposes & Legal Bases (GDPR)</h4>" +
+            "<p><strong>Email / early access:</strong> to administer your request and contact you when picks are ready (legitimate interests and/or contract-like steps at your request).</p>" +
+            "<p><strong>Analytics:</strong> only if you consent via the cookie banner/preferences (consent). You can withdraw consent any time via Cookie Preferences.</p>" +
+            "<h4>4. Sharing / Processors</h4>" +
+            "<p>We may use service providers to operate the site and manage signups (e.g., hosting, email delivery). When enabled with consent, If you enable analytics cookies, we may use an analytics provider to understand site usage in aggregate. If you do not enable analytics cookies, we do not load analytics. We do not sell personal information.</p>" +
+            "<h4>5. International Transfers</h4>" +
+            "<p>If data is processed outside your country, we rely on appropriate safeguards (such as contractual protections) where required.</p>" +
+            "<h4>6. Retention</h4>" +
+            "<p>We retain your email until you unsubscribe or request deletion. Technical analytics data (if enabled) is retained per provider settings.</p>" +
+            "<h4>7. Your Rights</h4>" +
+            "<p>Depending on your location, you may have rights to access, correct, delete, restrict, object, and portability. You may also withdraw analytics consent at any time.</p>" +
+            "<h4>8. Security</h4>" +
+            "<p>We use reasonable technical and organizational measures to protect data. No method of transmission/storage is 100% secure.</p>" +
+            "<h4>9. Changes</h4>" +
+            "<p>We may update this policy from time to time. Material changes will be posted here and, where appropriate, communicated via email.</p>"
+        },
+
+
+        terms: {
+          title: "Terms of Service",
+          content:
+            "<p><strong>Last Updated:</strong> December 16, 2025</p>" +
+            "<h4>1. Agreement</h4><p>By using FindNext, you agree to these Terms and the Privacy Policy. If you do not agree, please discontinue use.</p>" +
+            "<h4>2. Service</h4><p>FindNext provides informational content related to e-commerce trends and product discovery. Content is provided for general information only.</p>" +
+            "<h4>3. Warranty Disclaimer</h4>" +
+            "<p><strong>DISCLAIMER:</strong> FindNext is an independent service. Etsy, Inc. and its affiliates are not the developer of FindNext, do not sponsor or endorse FindNext, and make no warranties of any kind regarding FindNext.</p>" +
+            "<h4>4. No Advice / No Guarantees</h4>" +
+            "<p><strong>No Advice:</strong> Content is not financial, investment, legal, or business advice.</p>" +
+            "<p><strong>No Guarantees:</strong> We do not guarantee accuracy of predictions, availability of products, pricing, or outcomes.</p>" +
+            "<h4>5. Eligibility</h4><p>You must be at least 16 years old to use this service.</p>" +
+            "<h4>6. Contact</h4><p>Questions: hello@findnext.co</p>"
+        },
+
+        contact: {
+          title: "Contact Information",
+          content:
+            "<h4>Support</h4><p>If you need help, contact our monitored support inbox:</p>" +
+            "<p><strong>Support (monitored):</strong> hello@findnext.co</p>" +
+            "<p><strong>Privacy:</strong> privacy@findnext.co</p>" +
+            "<p><strong>Partnerships:</strong> partnerships@findnext.co</p>"
+        }
+
+      };
 
     // ----------------------------
     // Modal helpers
@@ -863,13 +999,14 @@
     }
     function closePost(){ closeModal('postModal'); }
 
-    function openLegal(type){
-      const l = LEGAL[type];
-      if(!l) return;
-      document.getElementById('legalTitle').textContent = l.title;
-      document.getElementById('legalBody').innerHTML = l.body;
-      openModal('legalModal');
-    }
+    function openLegal(type) {
+        const l = legalContent[type];
+        if (!l) return;
+        document.getElementById('legalTitle').innerHTML = '<h3>' + l.title + '</h3>';
+        document.getElementById('legalBody').innerHTML = l.content;
+        openModal('legalModal');
+      }
+
     function closeLegal(){ closeModal('legalModal'); }
 
     // click-away
@@ -921,7 +1058,7 @@
         const res = await fetch('/api/subscribe', {
           method:'POST',
           headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ email, source, persona, ts: Date.now(), ...attribution })
+          body: JSON.stringify({ email, source, persona, ts: Date.now(), attribution })
         });
 
         const text = await res.text();

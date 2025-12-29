@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FindNext — Discover Emerging Handmade and Creative Trends Trends | Pre-MVP Early Access</title>
+    <title>FindNext — Discover Emerging Handmade and Creative Trends | Pre-MVP Early Access</title>
     <meta name="description"
         content="Discover emerging handmade and creative trends. Join the waitlist to receive curated picks and trend insights when FindNext launches." />
 
@@ -44,21 +44,57 @@
         body {
             height: 100%;
             margin: 0;
-            padding: 0
+            padding: 0;
+             overflow-x: hidden; overflow-y: visible;
         }
 
         * {
             box-sizing: border-box
         }
 
-        body {
-            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-            background: radial-gradient(1200px 600px at 20% -10%, rgba(59, 130, 246, 0.25), transparent),
-                radial-gradient(1000px 500px at 80% 10%, rgba(34, 197, 94, 0.20), transparent),
-                linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
-            color: #fff;
-            line-height: 1.5;
-        }
+        body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color:#fff;
+  line-height:1.5;
+
+  background-color:#0b1220;
+
+  /* Seam-free: fade to transparent base color, not 'transparent' */
+  background-image:
+    /* Blue glow (top-left) */
+    radial-gradient(70vw 55vh at 18% -10%,
+      rgba(59,130,246,0.26) 0%,
+      rgba(11,18,32,0) 62%,
+      rgba(11,18,32,0) 100%),
+
+    /* Green glow (upper-right) */
+    radial-gradient(70vw 55vh at 85% 8%,
+      rgba(34,197,94,0.20) 0%,
+      rgba(11,18,32,0) 64%,
+      rgba(11,18,32,0) 100%),
+
+    /* Subtle green/teal wash (mid-left) */
+    radial-gradient(75vw 60vh at 20% 60%,
+      rgba(34,197,94,0.10) 0%,
+      rgba(11,18,32,0) 70%,
+      rgba(11,18,32,0) 100%),
+
+    /* Blue wash (bottom-right) */
+    radial-gradient(80vw 65vh at 85% 92%,
+      rgba(59,130,246,0.12) 0%,
+      rgba(11,18,32,0) 72%,
+      rgba(11,18,32,0) 100%),
+
+    /* Base */
+    linear-gradient(180deg,
+      #0b1220 0%,
+      #0c1426 45%,
+      #0f172a 100%);
+
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+}
+
 
         a {
             color: #93c5fd;
@@ -76,14 +112,16 @@
         }
 
         /* Header */
-        .topbar {
-            position: sticky;
-            top: 0;
-            z-index: 40;
-            background: rgba(11, 18, 32, .7);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border)
-        }
+        .topbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  isolation: isolate;
+  background: rgba(11, 18, 32, .7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
 
         .topbar-inner {
             display: flex;
@@ -120,26 +158,33 @@
             padding: 10px 0 5px
         }
 
-        .hero-wrap {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: var(--grid-gap);
-            align-items: stretch;
-            justify-items: stretch
-        }
+        .hero-wrap{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--grid-gap);
+  align-items:stretch;
+}
 
-        .hero-wrap>div {
-            display: contents
-        }
+.hero-head{
+  grid-column: 1 / -1;
+  text-align:center;
+}
 
-        .eyebrow,
-        .h1,
-        .lede {
-            grid-column: 1/-1;
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto
-        }
+
+.hero-main .card,
+.hero-aside .card{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+
+@media (max-width: 900px){
+  .hero-wrap{ grid-template-columns: 1fr; }
+  .hero-head, .hero-main, .hero-aside{ grid-column: 1; }
+}
+
+
 
         .h1 {
             font-size: clamp(30px, 5vw, 44px);
@@ -334,6 +379,9 @@
             text-align: center;
         }
 
+        
+
+
         .trend-brand {
             color: #60a5fa;
             font-weight: 600;
@@ -342,11 +390,7 @@
             transition: color .2s ease;
         }
 
-        .trend-brand:hover {
-            color: #3b82f6;
-            text-decoration: underline;
-        }
-
+        
         .guard-brand {
             color: #22c55e;
             font-weight: 600;
@@ -355,10 +399,7 @@
             transition: color .2s ease;
         }
 
-        .guard-brand:hover {
-            color: #16a34a;
-            text-decoration: underline;
-        }
+        
 
         /* KPIs (kept, but now phrased as features rather than unverified metrics) */
         .kpis {
@@ -1042,6 +1083,16 @@
             white-space: nowrap;
             border: 0
         }
+
+         @media(max-width:768px) {
+                .container .card div[style*="grid-template-columns"] {
+                    display: block !important;
+                }
+        
+                .container .card div[style*="grid-template-columns"]>div {
+                    margin-bottom: 16px;
+                }
+            }
     </style>
 
     <!-- Consent + Analytics gating (single source of truth) -->
@@ -1103,6 +1154,7 @@
 
 
             function closePrefs() {
+                window.FN_UI_LOCKED = false;
                 const el = document.querySelector('.fn-pref-backdrop');
                 if (el) el.style.display = 'none';
 
@@ -1368,42 +1420,50 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container hero-wrap">
-                <div>
+        
+                <!-- Full-width header row (spans both columns) -->
+                <div class="hero-head">
                     <div class="eyebrow">
                         <span class="pill">🤖 AI-powered</span>
                         <span class="pill">📡 Trend signals</span>
                         <span class="pill">💸 Free</span>
                     </div>
-
-                    <h1 class="h1">Discover emerging <span style="background:linear-gradient(transparent 60%, rgba(59,130,246,.4));">Etsy
-                            finds & creative trends</span></h1>
+        
+                    <h1 class="h1">
+                        Discover emerging
+                        <span style="background:linear-gradient(transparent 60%, rgba(59,130,246,.4));">
+                            handmade finds & creative trends
+                        </span>
+                    </h1>
+        
                     <p class="lede">
-                        FindNext is a discovery experience designed to surface emerging handmade and creative trends, helping shoppers and
-                        creators spot what’s gaining traction early.
-                        Join the waitlist to receive curated picks and trend insights when FindNext launches.
+                        FindNext is a discovery experience designed to surface emerging handmade and creative trends, helping
+                        shoppers and
+                        creators spot what’s gaining traction early. Join the waitlist to receive curated picks and trend
+                        insights when FindNext launches.
                     </p>
-
-
-                        <div class="hero-disclaimer">
-                            Etsy is a trademark of Etsy, Inc. FindNext is an independent service and is not endorsed or certified by Etsy.
-
-                        </div>
-
-                    
-
+        
+                    <div class="hero-disclaimer">
+                        The term "Etsy" is a trademark of Etsy, Inc. FindNext is an independent service and is not endorsed or certified by
+                        Etsy.
+                    </div>
+                </div>
+        
+                <!-- Left card -->
+                <div class="hero-main">
                     <div class="card">
                         <h2 class="sr-only">Join free trend alerts</h2>
-
+        
                         <!-- Social proof (truthful / non-quantified) -->
                         <div class="recent-activity">
                             <span class="pulse-dot"></span>
                             <span class="activity-text">Waitlist is open — launching soon</span>
                         </div>
-
+        
                         <form id="heroForm" class="signup" onsubmit="return submitLead(event,'hero')" novalidate>
                             <!-- Persona selection -->
                             <input type="hidden" id="personaHero" name="persona" value="consumer">
-                        
+        
                             <div class="persona-switch" role="group" aria-label="Choose waitlist type">
                                 <button type="button" class="persona-btn is-active" data-persona="consumer">
                                     For Shoppers
@@ -1412,10 +1472,10 @@
                                     For Sellers & Makers
                                 </button>
                             </div>
-                        
-                            <input id="email" name="email" type="email" placeholder="you@inbox.com" autocomplete="email" required
-                                aria-label="Email address">
-                        
+        
+                            <input id="email" name="email" type="email" placeholder="you@inbox.com" autocomplete="email"
+                                required aria-label="Email address">
+        
                             <div class="accept-terms">
                                 <label>
                                     <input type="checkbox" class="accept-box" required>
@@ -1425,12 +1485,10 @@
                                     </span>
                                 </label>
                             </div>
-                        
+        
                             <button class="cta" type="submit">Join the waitlist</button>
                         </form>
-
-
-                        
+        
                         <!-- What they'll get -->
                         <div class="value-props">
                             <div class="prop">
@@ -1440,20 +1498,19 @@
                             <div class="prop">
                                 <span class="prop-icon">⚡</span>
                                 <span>Multi-signal trend analysis for early discovery</span>
-
                             </div>
                             <div class="prop">
                                 <span class="prop-icon">🎯</span>
-                                <span>Insights powered by <a href="https://www.trendgraph.co" target="_blank"
-                                        rel="noopener noreferrer" class="trend-brand">TrendGraph</a></span>
+                                <span>Insights informed by FindNext’s internal analytics <span class="trend-brand">(TrendGraph)</span></span>
+
                             </div>
                             <div class="prop">
                                 <span class="prop-icon">🛡️</span>
-                                <span>Trust-first approach from <a href="https://www.trendguard.co" target="_blank"
-                                        rel="noopener noreferrer" class="guard-brand">TrendGuard</a></span>
+                                <span>Trust-first approach guided by internal safeguards <span class="guard-brand">(TrendGuard)</span></span>
+
                             </div>
                         </div>
-
+        
                         <div class="kpis" role="region" aria-label="What to expect">
                             <div class="kpi">
                                 <b>Handmade-first</b>
@@ -1470,8 +1527,9 @@
                         </div>
                     </div>
                 </div>
-
-                <aside>
+        
+                <!-- Right card -->
+                <aside class="hero-aside">
                     <div class="card" style="overflow:hidden">
                         <svg class="thumb" style="width:100%;height:auto;aspect-ratio:4/3;display:block" width="640"
                             height="480" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg"
@@ -1493,7 +1551,7 @@
                                     <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#00000015" />
                                 </filter>
                             </defs>
-
+        
                             <rect width="640" height="480" fill="url(#bgGradient)" />
                             <rect x="0" y="0" width="640" height="70" fill="#1e293b" filter="url(#headerShadow)" />
                             <circle cx="24" cy="25" r="4" fill="#22c55e" />
@@ -1503,55 +1561,55 @@
                                 fill="#ffffff">Recent Winners</text>
                             <text x="24" y="58" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8">Examples
                                 of the type of insights we share</text>
-
-                            <text x="616" y="29" font-family="Inter, sans-serif" font-size="10" font-weight="600"
-                                fill="#64748b" text-anchor="end">FindNext</text>
-                            <text x="616" y="40" font-family="Inter, sans-serif" font-size="8" font-weight="500"
-                                fill="#64748b" text-anchor="end">PREVIEW</text>
-
+        
+                            <text x="616" y="29" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#64748b"
+                                text-anchor="end">FindNext</text>
+                            <text x="616" y="40" font-family="Inter, sans-serif" font-size="8" font-weight="500" fill="#64748b"
+                                text-anchor="end">PREVIEW</text>
+        
                             <rect x="24" y="86" width="184" height="120" rx="12" fill="url(#cardGradient)"
                                 filter="url(#cardShadow)" stroke="#e2e8f0" stroke-width="1" />
                             <rect x="36" y="98" width="24" height="24" rx="6" fill="#fce7f3" />
-                            <text x="48" y="108" font-family="Inter, sans-serif" font-size="7" font-weight="600"
-                                fill="#be185d" text-anchor="middle">Hair</text>
-                            <text x="48" y="116" font-family="Inter, sans-serif" font-size="7" font-weight="600"
-                                fill="#be185d" text-anchor="middle">Bow</text>
+                            <text x="48" y="108" font-family="Inter, sans-serif" font-size="7" font-weight="600" fill="#be185d"
+                                text-anchor="middle">Hair</text>
+                            <text x="48" y="116" font-family="Inter, sans-serif" font-size="7" font-weight="600" fill="#be185d"
+                                text-anchor="middle">Bow</text>
                             <text x="68" y="104" font-family="Inter, sans-serif" font-size="12" font-weight="700"
                                 fill="#1e293b">Coquette Hair Bows</text>
                             <text x="68" y="116" font-family="Inter, sans-serif" font-size="9" fill="#64748b">Example
                                 timeline</text>
                             <rect x="68" y="124" width="128" height="16" rx="8" fill="#dcfce7" />
-                            <text x="132" y="134" font-family="Inter, sans-serif" font-size="9" font-weight="700"
-                                fill="#166534" text-anchor="middle">Strong signal</text>
-
+                            <text x="132" y="134" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#166534"
+                                text-anchor="middle">Strong signal</text>
+        
                             <rect x="228" y="86" width="184" height="120" rx="12" fill="url(#cardGradient)"
                                 filter="url(#cardShadow)" stroke="#e2e8f0" stroke-width="1" />
                             <rect x="240" y="98" width="24" height="24" rx="6" fill="#fef3c7" />
-                            <text x="252" y="112" font-family="Inter, sans-serif" font-size="6" font-weight="600"
-                                fill="#92400e" text-anchor="middle">Mushroom</text>
+                            <text x="252" y="112" font-family="Inter, sans-serif" font-size="6" font-weight="600" fill="#92400e"
+                                text-anchor="middle">Mushroom</text>
                             <text x="272" y="104" font-family="Inter, sans-serif" font-size="12" font-weight="700"
                                 fill="#1e293b">Mushroom Table Lamps</text>
                             <text x="272" y="116" font-family="Inter, sans-serif" font-size="9" fill="#64748b">Example
                                 timeline</text>
                             <rect x="272" y="124" width="128" height="16" rx="8" fill="#dcfce7" />
-                            <text x="336" y="134" font-family="Inter, sans-serif" font-size="9" font-weight="700"
-                                fill="#166534" text-anchor="middle">Rising</text>
-
+                            <text x="336" y="134" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#166534"
+                                text-anchor="middle">Rising</text>
+        
                             <rect x="432" y="86" width="184" height="120" rx="12" fill="url(#cardGradient)"
                                 filter="url(#cardShadow)" stroke="#e2e8f0" stroke-width="1" />
                             <rect x="444" y="98" width="24" height="24" rx="6" fill="#dcfdf4" />
-                            <text x="456" y="108" font-family="Inter, sans-serif" font-size="7" font-weight="600"
-                                fill="#059669" text-anchor="middle">Tote</text>
-                            <text x="456" y="116" font-family="Inter, sans-serif" font-size="7" font-weight="600"
-                                fill="#059669" text-anchor="middle">Bag</text>
+                            <text x="456" y="108" font-family="Inter, sans-serif" font-size="7" font-weight="600" fill="#059669"
+                                text-anchor="middle">Tote</text>
+                            <text x="456" y="116" font-family="Inter, sans-serif" font-size="7" font-weight="600" fill="#059669"
+                                text-anchor="middle">Bag</text>
                             <text x="476" y="104" font-family="Inter, sans-serif" font-size="12" font-weight="700"
                                 fill="#1e293b">Mini Canvas Totes</text>
                             <text x="476" y="116" font-family="Inter, sans-serif" font-size="9" fill="#64748b">Example
                                 timeline</text>
                             <rect x="476" y="124" width="128" height="16" rx="8" fill="#fed7aa" />
-                            <text x="540" y="134" font-family="Inter, sans-serif" font-size="9" font-weight="700"
-                                fill="#9a3412" text-anchor="middle">Building</text>
-
+                            <text x="540" y="134" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#9a3412"
+                                text-anchor="middle">Building</text>
+        
                             <rect x="24" y="222" width="592" height="68" rx="12" fill="url(#cardGradient)"
                                 filter="url(#cardShadow)" stroke="#e2e8f0" stroke-width="1" />
                             <text x="40" y="242" font-family="Inter, sans-serif" font-size="15" font-weight="700"
@@ -1559,12 +1617,16 @@
                             <text x="40" y="268" font-family="Inter, sans-serif" font-size="10" fill="#64748b">Signal
                                 summary • Why it’s moving • Category context • What to watch next</text>
                         </svg>
-                        <div style="padding:12px 14px;color:#cbd5e1;font-size:14px">A peek at what we will send, curated picks
-                            with trend context and why they're moving.</div>
+        
+                        <div style="padding:12px 14px;color:#cbd5e1;font-size:14px">
+                            A peek at what we will send, curated picks with trend context and why they're moving.
+                        </div>
                     </div>
                 </aside>
+        
             </div>
         </section>
+
         
 
     <!-- Creator Support Section -->
@@ -1672,7 +1734,7 @@
         <!-- SMB Micro-Section (Compact) -->
         <section class="container value" aria-labelledby="smb-note" style="margin-top:4px">
             <h2 id="smb-note" style="margin:0 0 6px;text-align:center">
-                For Etsy sellers & small businesses
+                For sellers & small businesses
             </h2>
         
             <div class="card" style="text-align:left;padding:16px 18px">
@@ -1711,18 +1773,7 @@
             </div>
         </section>
         
-        <!-- Mobile-friendly version -->
-        <style>
-            @media(max-width:768px) {
-                .container .card div[style*="grid-template-columns"] {
-                    display: block !important;
-                }
-        
-                .container .card div[style*="grid-template-columns"]>div {
-                    margin-bottom: 16px;
-                }
-            }
-        </style>
+       
 
 
         <!-- Final CTA -->
@@ -1790,7 +1841,7 @@
             </div>
             <small>
                 © 2025 FindNext. We may earn commissions from qualifying purchases. Editorially independent picks.<br>
-                Etsy is a trademark of Etsy, Inc. FindNext is an independent service and is not endorsed or certified by Etsy.
+               The term "Etsy" is a trademark of Etsy, Inc. FindNext is an independent service and is not endorsed or certified by Etsy.
             </small>
         </div>
     </footer>
@@ -2251,9 +2302,9 @@
             if (!result?.ok) {
                 console.warn('Lead capture failed:', result);
                 fnLog('postLead failed', result);
-
-                // Optional (later): surface a soft inline error or toast
+                showErrorToast("We couldn't save your request right now. Please try again.");
             }
+
 
             if (btn) {
                 btn.disabled = false;
@@ -2303,7 +2354,7 @@
                     '<div class="toast-header">Welcome to FindNext</div>' +
                     '<div class="toast-body">You’re on the waitlist. We’ll email you when FindNext launches with your first trend insights.</div>' +
                     '<div class="toast-actions">' +
-                    '<a href="blog/index.html" class="toast-cta">Read our blog</a>' +
+                    '<a href="/blog.html" class="toast-cta">Read our blog</a>' +
                     '<button class="toast-resend" onclick="submitAgain(\'' + safeEmail + '\', \'' + safePersona + '\')">Submit again</button>' +
                     '</div>';
 
