@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FindNext Blog — Transparency, Methodology & Pre-MVP Updates</title>
+  <meta name="description" content="FindNext blog: how it works (pre-MVP), transparency & disclosures, and launch updates." />
+  <link rel="canonical" href="https://findnext.co/blog/" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#3B82F6" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FindNext Blog — Transparency, Methodology & Pre-MVP Updates" />
+  <meta property="og:description" content="How FindNext works (pre-MVP), our transparency commitments, and launch updates." />
+  <meta property="og:url" content="https://findnext.co/blog/" />
+  <meta property="og:image" content="https://findnext.co/og.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FindNext Blog — Transparency, Methodology & Pre-MVP Updates" />
+  <meta name="twitter:description" content="How FindNext works (pre-MVP), transparency, and launch updates." />
+  <meta name="twitter:image" content="https://findnext.co/og.png" />
+
+  <style>
+    :root{
+      --brand:#3B82F6;
+      --accent:#22C55E;
+      --ink:#0b1220;
+      --border: rgba(255,255,255,.12);
+      --content-width: 1100px;
+      --grid-gap: 16px;
+    }
+    html,body{height:100%;margin:0;padding:0}
+    *{box-sizing:border-box}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(59,130,246,.25), transparent),
+        radial-gradient(1000px 500px at 80% 10%, rgba(34,197,94,.20), transparent),
+        linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+      color:#fff;
+      line-height:1.5;
+    }
+    a{color:#93c5fd;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:var(--content-width);margin:0 auto;padding:0 16px}
+
+    /* Topbar (matches index) */
+    .topbar{
+      position: sticky; top:0; z-index:40;
+      background: rgba(11,18,32,.7);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{display:flex;gap:14px;align-items:center;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand .logo{width:20px;height:20px;display:flex;align-items:center;justify-content:center}
+    .nav{margin-left:auto;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .nav a{color:#cbd5e1}
+    .trust{
+      margin-left:auto;
+      color:#cbd5e1;
+      display:flex;
+      gap:16px;
+      font-size:13px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    /* Hero */
+    .hero{padding:18px 0 10px}
+    .eyebrow{
+      display:flex;justify-content:center;gap:10px;align-items:center;
+      font-weight:700;color:#cbd5e1;flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 10px;border-radius:999px;
+      background: rgba(59,130,246,.12);
+      border:1px solid rgba(59,130,246,.35);
+      box-shadow: 0 0 0 2px rgba(59,130,246,.10) inset, 0 0 18px rgba(34,197,94,.18);
+    }
+    .h1{
+      font-size: clamp(30px, 5vw, 44px);
+      line-height:1.08;
+      margin:10px 0 10px;
+      letter-spacing:-.02em;
+      text-align:center;
+    }
+    .lede{
+      color:#cbd5e1;
+      font-size:18px;
+      margin:0 auto 10px;
+      text-align:center;
+      max-width: 920px;
+    }
+    .hero-disclaimer{
+      text-align:center;
+      color:#94a3b8;
+      font-size:12px;
+      margin:10px auto 0;
+      max-width: 900px;
+    }
+
+    /* Cards */
+    .card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 16px 44px rgba(2,6,23,.35);
+      padding: 18px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 16px 0 24px;
+    }
+    @media(max-width:900px){ .grid3{grid-template-columns:1fr} }
+
+    .blog-meta{
+      font-size:12px;
+      color:#cbd5e1;
+      font-weight:800;
+      letter-spacing:.02em;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      margin-bottom:10px;
+    }
+    .post-title{
+      margin:0 0 8px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+    .post-excerpt{
+      margin:0 0 12px;
+      color:#cbd5e1;
+      font-size:14.5px;
+      line-height:1.55;
+    }
+    .readmore{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      font-weight:900;
+      color:#e2e8f0;
+    }
+
+    /* Inline signup */
+    .signup-wrap{
+      margin: 8px 0 24px;
+      text-align:center;
+    }
+    .signup{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+      margin-top: 10px;
+    }
+    .signup input[type=email]{
+      flex: 1 1 260px;
+      min-height: 50px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: #0c1628;
+      color:#fff;
+      padding: 12px 14px;
+      max-width: 420px;
+    }
+    .cta{
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--brand), #60a5fa);
+      color:#fff;
+      cursor:pointer;
+      box-shadow: 0 12px 32px rgba(59,130,246,.35);
+      white-space:nowrap;
+    }
+    .accept-terms{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      margin-top:10px;
+      color:#cbd5e1;
+      font-size:12px;
+    }
+    .accept-terms label{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      max-width: 560px;
+      line-height:1.35;
+      text-align:left;
+    }
+    .accept-terms input{margin-top:2px}
+    .accept-terms a{color:#93c5fd;text-decoration:underline}
+
+    /* Footer */
+    footer{
+      color:#94a3b8;
+      border-top: 1px solid var(--border);
+      padding: 20px 0 40px;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    .links{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+
+    /* Toast */
+    .toast{
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, rgba(11,18,32,.96), rgba(15,23,42,.96));
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(34,197,94,.3);
+      color:#fff;
+      padding: 22px 24px;
+      font-size: 1.02rem;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(34,197,94,.2);
+      z-index: 1000;
+      text-align:center;
+      max-width: min(560px, 92vw);
+      line-height: 1.45;
+      display:none;
+    }
+    .toast-close{
+      position:absolute; top:10px; right:14px;
+      background:transparent; border:none; color:#94a3b8;
+      font-size:18px; cursor:pointer; opacity:.85;
+    }
+    .toast-close:hover{opacity:1}
+
+    /* Modal */
+    .modal{
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(2,6,23,.72);
+      backdrop-filter: blur(8px);
+      z-index: 90;
+      padding: 18px;
+    }
+    .sheet{
+      width: min(820px, calc(100% - 20px));
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+      background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(2,6,23,.6);
+      padding: 18px 18px 16px;
+      text-align:left;
+      position: relative;
+    }
+    .closex{
+      position:absolute; top:10px; right:12px;
+      background:transparent;border:none;color:#cbd5e1;
+      font-size:22px;cursor:pointer;opacity:.85;
+    }
+    .closex:hover{opacity:1}
+    .post-header{
+      padding-right: 36px;
+    }
+    .post-h2{
+      margin: 8px 0 10px;
+      font-size: 26px;
+      line-height: 1.18;
+      letter-spacing: -.01em;
+    }
+    .post-sub{
+      margin: 0 0 14px;
+      color:#cbd5e1;
+      font-size: 14px;
+    }
+    .post-body{
+      color:#e5e7eb;
+      font-size: 14.8px;
+      line-height: 1.7;
+    }
+    .post-body h3{
+      margin: 18px 0 8px;
+      font-size: 17px;
+      color:#93c5fd;
+    }
+    .post-body ul{margin: 10px 0; padding-left: 20px}
+    .post-body li{margin: 6px 0}
+    .callout{
+      margin: 14px 0;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color:#cbd5e1;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    /* Cookie banner (same style as index) */
+    .fn-cookie-banner{
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 9999;
+      background: rgba(15,23,42,.96);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      color:#e5e7eb;
+      padding: 14px 14px 12px;
+      box-shadow: 0 18px 48px rgba(2,6,23,.5);
+      display:none;
+    }
+    .fn-cookie-banner .row{
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+    }
+    .fn-cookie-banner .row p{
+      margin:0; flex:1; min-width:240px;
+      color:#cbd5e1; line-height:1.45;
+    }
+    .fn-btn{border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:700}
+    .fn-btn.primary{background:linear-gradient(90deg,#3B82F6,#60a5fa);color:#fff}
+    .fn-btn.secondary{background:rgba(255,255,255,.06);color:#e5e7eb;border:1px solid rgba(255,255,255,.15)}
+    .fn-link{color:#93c5fd;text-decoration:none}
+    .fn-link:hover{text-decoration:underline}
+    .fn-pref-backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(2,6,23,.72);
+      backdrop-filter: blur(8px);
+      display:none;
+      z-index: 9999;
+    }
+    .fn-pref{
+      width:min(720px, calc(100% - 32px));
+      margin:40px auto;
+      background: linear-gradient(180deg,#0b1220,#0f172a);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      padding:16px 16px 14px;
+      color:#e5e7eb;
+    }
+    .fn-pref h3{margin:6px 0 8px;font-size:20px}
+    .fn-pref .opt{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:12px;
+      padding:10px;
+      margin:8px 0;
+      background: rgba(255,255,255,.04);
+    }
+    .fn-toggle{
+      appearance:none;
+      width:44px;height:26px;border-radius:999px;
+      background:#64748b; position:relative;
+      outline:none; cursor:pointer;
+      border:1px solid rgba(255,255,255,.2);
+    }
+    .fn-toggle:checked{background:#22c55e}
+    .fn-toggle::after{
+      content:'';
+      position:absolute; top:2px; left:2px;
+      width:20px; height:20px;
+      background:#fff; border-radius:50%;
+      transition: transform .18s;
+    }
+    .fn-toggle:checked::after{transform:translateX(18px)}
+
+    /* SR only */
+    .sr-only{
+      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
+  </style>
+
+  <!-- Consent + Analytics gating (approval build: GA disabled by default) -->
+  <script>
+    (function(){
+      const KEY='fn_consent_v1';
+      // Approval build: keep blank. Post-approval: set to your GA ID (e.g., G-XXXX).
+      const GA_ID = '';
+
+      function getConsent(){
+        try{ return JSON.parse(localStorage.getItem(KEY)) || {analytics:false, marketing:false, ts:0}; }
+        catch(e){ return {analytics:false, marketing:false, ts:0}; }
+      }
+      function setConsent(c){ try{ localStorage.setItem(KEY, JSON.stringify(c)); }catch(e){} }
+      function hasChoice(){ return !!getConsent().ts; }
+
+      let gaLoaded=false;
+      function loadAnalytics(){
+        if(gaLoaded) return;
+        if(!GA_ID) return;
+        gaLoaded=true;
+        const s=document.createElement('script');
+        s.async=true;
+        s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_ID);
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ window.dataLayer.push(arguments); }
+        window.gtag=gtag;
+        gtag('js', new Date());
+        gtag('config', GA_ID, { anonymize_ip:true });
+      }
+
+      function showBanner(){ const el=document.querySelector('.fn-cookie-banner'); if(el) el.style.display='block'; }
+      function hideBanner(){ const el=document.querySelector('.fn-cookie-banner'); if(el) el.style.display='none'; }
+
+      function openPrefs(){
+        hideBanner();
+        const el=document.querySelector('.fn-pref-backdrop');
+        if(el) el.style.display='block';
+        const c=getConsent();
+        const t=document.getElementById('opt-analytics');
+        if(t) t.checked=!!c.analytics;
+      }
+      function closePrefs(){
+        const el=document.querySelector('.fn-pref-backdrop');
+        if(el) el.style.display='none';
+        try{ const c=getConsent(); if(!c.ts) showBanner(); }catch(e){}
+      }
+
+      window.FNConsent = {
+        acceptAll(){
+          setConsent({analytics:true, marketing:false, ts:Date.now()});
+          loadAnalytics();
+          closePrefs();
+          hideBanner();
+        },
+        rejectAll(){
+          setConsent({analytics:false, marketing:false, ts:Date.now()});
+          closePrefs();
+          hideBanner();
+        },
+        savePrefs(){
+          const a = !!document.getElementById('opt-analytics')?.checked;
+          setConsent({analytics:a, marketing:false, ts:Date.now()});
+          if(a) loadAnalytics();
+          closePrefs();
+          hideBanner();
+        },
+        openPrefs,
+        closePrefs
+      };
+
+      function init(){
+        const c=getConsent();
+        if(c.analytics) loadAnalytics();
+        if(!hasChoice()) showBanner();
+      }
+      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
+      else init();
+    })();
+  </script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="11.5" fill="#2a3e51" stroke="#475569" stroke-width="1" />
+            <circle cx="12" cy="12" r="8" fill="#374151" fill-opacity="0.5" />
+            <path d="M12 6L9 12L12 18L15 12L12 6Z" fill="url(#compass-gradient)" />
+            <circle cx="12" cy="12" r="1.5" fill="#ffffff" />
+            <defs>
+              <linearGradient id="compass-gradient" x1="12" y1="6" x2="12" y2="18" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#22c55e" />
+                <stop offset="1" stop-color="#3983f6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <a href="../index.html" style="color:#fff;text-decoration:none">FindNext</a>
+      </div>
+
+      
+
+      <div class="trust" aria-label="Trust indicators">
+        <span>🔒 No spam</span>
+        <span>✅ 1-click unsubscribe</span>
+        <span>🧾 Transparent disclosures</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">
+          <span class="pill">📚 Transparency</span>
+          <span class="pill">🧭 How it works</span>
+          <span class="pill">🚀 Pre-MVP</span>
+        </div>
+
+        <h1 class="h1">FindNext Blog</h1>
+        <p class="lede">
+          Clear, approval-safe documentation on how FindNext works (pre-MVP), what we do and do not do, and what to expect at launch.
+        </p>
+
+        <div class="hero-disclaimer">
+          Etsy is a trademark of Etsy, Inc. FindNext is an independent service and is not endorsed or certified by Etsy.
+        </div>
+
+        <div class="signup-wrap">
+          <div class="card">
+            <h2 class="sr-only">Join blog + launch updates</h2>
+            <p style="margin:0;color:#cbd5e1;font-size:14.5px;line-height:1.55;text-align:center;max-width:860px;margin-left:auto;margin-right:auto">
+              Want a weekly email when FindNext launches? Join the waitlist for curated picks and trend context.
+            </p>
+            <form id="blogSignupForm" class="signup" onsubmit="return submitLead(event,'blog')" novalidate>
+              <input type="hidden" name="persona" value="consumer">
+              <input id="blogEmail" name="email" type="email" placeholder="you@inbox.com" autocomplete="email" required aria-label="Email address" />
+              <button class="cta" type="submit">Join the waitlist</button>
+              <div class="accept-terms">
+                <label>
+                  <input type="checkbox" class="accept-box" required>
+                  <span>
+                    I agree to the <a href="#" onclick="openLegal('terms'); return false;">Terms</a> and
+                    <a href="#" onclick="openLegal('privacy'); return false;">Privacy Policy</a>.
+                  </span>
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <section class="grid3" aria-label="Blog posts">
+          <article class="card">
+            <div class="blog-meta">🧭 How it works (pre-MVP)</div>
+            <h3 class="post-title">
+              <a href="#" onclick="openPost('how-it-works'); return false;">How FindNext identifies emerging handmade trends</a>
+            </h3>
+            <p class="post-excerpt">
+              A practical explanation of our approach using publicly observable signals, editorial review, and transparent disclosure.
+            </p>
+            <a class="readmore" href="#" onclick="openPost('how-it-works'); return false;">Read →</a>
+          </article>
+
+          <article class="card">
+            <div class="blog-meta">🧾 Transparency</div>
+            <h3 class="post-title">
+              <a href="#" onclick="openPost('independence-disclosure'); return false;">Independence, disclosures, and what we do not do</a>
+            </h3>
+            <p class="post-excerpt">
+              How we stay editorially independent, handle affiliate disclosure, and avoid confusing users about marketplace affiliation.
+            </p>
+            <a class="readmore" href="#" onclick="openPost('independence-disclosure'); return false;">Read →</a>
+          </article>
+
+          <article class="card">
+            <div class="blog-meta">🚀 Product update</div>
+            <h3 class="post-title">
+              <a href="#" onclick="openPost('pre-mvp-update'); return false;">Pre-MVP launch update: what’s live and what’s next</a>
+            </h3>
+            <p class="post-excerpt">
+              What’s available today, what we’re building next, and how you can participate in early access.
+            </p>
+            <a class="readmore" href="#" onclick="openPost('pre-mvp-update'); return false;">Read →</a>
+          </article>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Post Modal -->
+  <div id="postModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="postTitle" aria-hidden="true">
+    <div class="sheet">
+      <button aria-label="Close" class="closex" onclick="closePost()">×</button>
+      <div class="post-header">
+        <div class="blog-meta" id="postMeta">Post</div>
+        <h2 class="post-h2" id="postTitle">Title</h2>
+        <div class="post-sub" id="postSub">Last updated: December 2025</div>
+      </div>
+      <div class="callout" id="postCallout">
+        Etsy is a trademark of Etsy, Inc. FindNext is an independent service and is not endorsed or certified by Etsy.
+      </div>
+      <div class="post-body" id="postBody"></div>
+    </div>
+  </div>
+
+  <!-- Legal Modal (simple, approval-safe) -->
+  <div id="legalModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="legalTitle" aria-hidden="true">
+    <div class="sheet">
+      <button aria-label="Close" class="closex" onclick="closeLegal()">×</button>
+      <div class="post-header">
+        <div class="blog-meta">Policy</div>
+        <h2 class="post-h2" id="legalTitle">Title</h2>
+      </div>
+      <div class="post-body" id="legalBody"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="links">
+        <a href="#" onclick="openLegal('disclosure'); return false;">Affiliate Disclosure</a>
+        <a href="#" onclick="openLegal('privacy'); return false;">Privacy Policy</a>
+        <a href="#" onclick="openLegal('terms'); return false;">Terms of Service</a>
+        <a href="#" onclick="openLegal('contact'); return false;">Contact</a>
+        <a href="#" onclick="openPost('how-it-works'); return false;">How It Works</a>
+        <a href="./">Blog</a>
+        <a href="#" onclick="FNConsent.openPrefs(); return false;">Cookie Preferences</a>
+      </div>
+
+      <small>
+        © 2025 FindNext. We may earn commissions from qualifying purchases. Editorially independent picks.<br />
+        Etsy is a trademark of Etsy, Inc. FindNext is an independent service and is not endorsed or certified by Etsy.
+      </small>
+    </div>
+  </footer>
+
+  <!-- Cookie Banner -->
+  <div class="fn-cookie-banner" role="dialog" aria-label="Cookie consent">
+    <div class="row">
+      <p>
+        We use cookies to enhance your experience and for analytics (with your consent). You can manage your preferences at any time.
+        See our <a class="fn-link" href="#" onclick="openLegal('privacy'); return false;">Privacy Policy</a> for details.
+      </p>
+      <button class="fn-btn secondary" onclick="FNConsent.openPrefs()">Manage</button>
+      <button class="fn-btn secondary" onclick="FNConsent.rejectAll()">Reject</button>
+      <button class="fn-btn primary" onclick="FNConsent.acceptAll()">Accept</button>
+    </div>
+  </div>
+
+  <!-- Cookie Preferences Modal -->
+  <div class="fn-pref-backdrop" role="dialog" aria-modal="true" aria-label="Cookie Preferences">
+    <div class="fn-pref" onclick="event.stopPropagation()">
+      <h3>Cookie Preferences</h3>
+      <div class="opt">
+        <div>
+          <strong>Necessary Cookies</strong>
+          <div style="color:#94a3b8;font-size:12px">Essential for site functionality. Cannot be disabled.</div>
+        </div>
+        <input class="fn-toggle" type="checkbox" checked disabled aria-label="Necessary cookies (always enabled)">
+      </div>
+      <div class="opt">
+        <div>
+          <strong>Analytics Cookies</strong>
+          <div style="color:#94a3b8;font-size:12px">Help us understand how visitors interact with our site. Anonymous data only.</div>
+        </div>
+        <input id="opt-analytics" class="fn-toggle" type="checkbox" aria-label="Enable analytics cookies">
+      </div>
+      <div class="opt">
+        <div>
+          <strong>Marketing Cookies</strong>
+          <div style="color:#94a3b8;font-size:12px">Not in use on FindNext right now. This toggle is disabled until implemented.</div>
+        </div>
+        <input class="fn-toggle" type="checkbox" disabled aria-label="Marketing cookies (not implemented)">
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
+        <button class="fn-btn secondary" onclick="FNConsent.rejectAll()">Reject All</button>
+        <button class="fn-btn primary" onclick="FNConsent.savePrefs()">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ----------------------------
+    // Content (approval-safe)
+    // ----------------------------
+    const POSTS = {
+      "how-it-works": {
+        meta: "🧭 How it works (pre-MVP)",
+        title: "How FindNext identifies emerging handmade trends",
+        sub: "Last updated: December 2025",
+        body: `
+          <p>
+            FindNext is a <strong>pre-MVP discovery service</strong> designed to surface emerging handmade and creative themes.
+            Our goal is to help shoppers and makers understand what’s gaining traction <em>without</em> paid amplification or confusing endorsements.
+          </p>
+
+          <h3>What signals we use (high level)</h3>
+          <ul>
+            <li><strong>Publicly observable signals:</strong> patterns from public sources (e.g., social chatter, search interest, content velocity).</li>
+            <li><strong>Consistency checks:</strong> we look for durable themes rather than one-off spikes.</li>
+            <li><strong>Editorial review:</strong> before anything is recommended, we apply a human sanity check for quality and clarity.</li>
+          </ul>
+
+          <h3>What we do not do</h3>
+          <ul>
+            <li>We do not claim marketplace endorsement or certification.</li>
+            <li>We do not present predictions as guarantees.</li>
+            <li>We avoid implying access to non-public marketplace data.</li>
+          </ul>
+
+          <h3>What you’ll receive at launch</h3>
+          <ul>
+            <li><strong>Weekly Top 3 picks</strong> with context on why a theme appears to be moving.</li>
+            <li>Simple explanations (what it is, who it’s for, what to watch next).</li>
+            <li>Clear disclosure if any links could earn a commission.</li>
+          </ul>
+
+          <div class="callout">
+            <strong>Note:</strong> FindNext is an independent service. We focus on transparency and user value. You can unsubscribe anytime.
+          </div>
+        `
+      },
+
+      "independence-disclosure": {
+        meta: "🧾 Transparency",
+        title: "Independence, disclosures, and what we do not do",
+        sub: "Last updated: December 2025",
+        body: `
+          <p>
+            FindNext is built to be easy to trust. That means being explicit about independence, disclosures, and limitations.
+          </p>
+
+          <h3>Independence</h3>
+          <ul>
+            <li>FindNext is <strong>not affiliated with</strong>, endorsed by, or certified by Etsy.</li>
+            <li>We do not use Etsy logos or branding in a way that implies official status.</li>
+          </ul>
+
+          <h3>Affiliate disclosure</h3>
+          <ul>
+            <li>We may earn commissions from qualifying purchases at no additional cost to you.</li>
+            <li>Affiliate relationships do not determine what we cover. We prioritize clarity and usefulness.</li>
+          </ul>
+
+          <h3>Privacy and cookies</h3>
+          <ul>
+            <li>We use <strong>consent-based</strong> analytics. If analytics is disabled, we do not load analytics scripts.</li>
+            <li>Marketing cookies are not implemented on FindNext at this time.</li>
+          </ul>
+
+          <h3>What we do not do</h3>
+          <ul>
+            <li>We do not sell personal information.</li>
+            <li>We do not claim guaranteed outcomes, pricing, or product availability.</li>
+            <li>We do not imply access to non-public marketplace data.</li>
+          </ul>
+
+          <div class="callout">
+            If you have questions, contact <strong>hello@findnext.co</strong>. Privacy requests: <strong>privacy@findnext.co</strong>.
+          </div>
+        `
+      },
+
+      "pre-mvp-update": {
+        meta: "🚀 Product update",
+        title: "Pre-MVP launch update: what’s live and what’s next",
+        sub: "Last updated: December 2025",
+        body: `
+          <p>
+            This is an early release intended to support marketplace partner review and to begin building the waitlist.
+            We’re keeping the surface area small and transparent.
+          </p>
+
+          <h3>What’s live now</h3>
+          <ul>
+            <li>Waitlist signup with clear Terms + Privacy acceptance.</li>
+            <li>A simple “sneak peek” of example themes (illustrative).</li>
+            <li>This blog documenting our approach and disclosures.</li>
+          </ul>
+
+          <h3>What’s next</h3>
+          <ul>
+            <li>Weekly email format: Top 3 picks with context.</li>
+            <li>Category preferences (so alerts match what you care about).</li>
+            <li>More detailed transparency pages (data sources and signal integrity policy) as we expand.</li>
+          </ul>
+
+          <h3>How you can help</h3>
+          <ul>
+            <li>Join the waitlist and share feedback on what you’d like to see in the weekly email.</li>
+            <li>If you’re a maker/seller, tell us what would be most useful for planning (themes, keywords, angles).</li>
+          </ul>
+
+          <div class="callout">
+            We may earn commissions from qualifying purchases. Editorially independent picks.
+          </div>
+        `
+      }
+    };
+
+    const LEGAL = {
+      disclosure: {
+        title: "Affiliate Disclosure",
+        body: `
+          <p><strong>FindNext participates in affiliate marketing programs</strong> and may earn commissions from qualifying purchases made through our links.</p>
+          <p><strong>Editorial independence:</strong> Our recommendations are based on publicly observable signals and editorial judgment, not affiliate earnings potential.</p>
+          <p><strong>Independence:</strong> FindNext is an independent service and is not affiliated with or endorsed by Etsy. Etsy is a trademark of Etsy, Inc.</p>
+        `
+      },
+      privacy: {
+        title: "Privacy Policy (Summary)",
+        body: `
+          <p><strong>Last Updated:</strong> December 2025</p>
+          <p><strong>What we collect:</strong> your email if you join the waitlist. Basic technical usage data only if you enable analytics cookies.</p>
+          <p><strong>Cookies:</strong> necessary cookies for site functionality; analytics cookies only with consent; marketing cookies are not implemented.</p>
+          <p><strong>Your choices:</strong> you can manage analytics consent anytime via Cookie Preferences.</p>
+          <p><strong>Contact:</strong> hello@findnext.co • privacy@findnext.co</p>
+        `
+      },
+      terms: {
+        title: "Terms of Service (Summary)",
+        body: `
+          <p><strong>Last Updated:</strong> December 2025</p>
+          <p>FindNext provides informational content related to product discovery and trends. Content is for general information only.</p>
+          <p><strong>No guarantees:</strong> we do not guarantee accuracy of predictions, availability of products, pricing, or outcomes.</p>
+          <p><strong>Independence disclaimer:</strong> Etsy, Inc. is not the application developer and makes no warranties with respect to this service.</p>
+          <p><strong>Contact:</strong> hello@findnext.co</p>
+        `
+      }
+    };
+
+    // ----------------------------
+    // Modal helpers
+    // ----------------------------
+    let lastFocusEl = null;
+
+    function openModal(id){
+      const m = document.getElementById(id);
+      if(!m) return;
+      lastFocusEl = document.activeElement;
+      m.style.display = 'grid';
+      m.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      const first = m.querySelector('button, a, input, [tabindex]:not([tabindex="-1"])');
+      if(first) setTimeout(() => first.focus(), 0);
+    }
+
+    function closeModal(id){
+      const m = document.getElementById(id);
+      if(!m) return;
+      m.style.display = 'none';
+      m.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      if(lastFocusEl && typeof lastFocusEl.focus === 'function'){
+        try{ lastFocusEl.focus(); }catch(e){}
+      }
+    }
+
+    function openPost(slug){
+      const p = POSTS[slug];
+      if(!p) return;
+
+      document.getElementById('postMeta').textContent = p.meta;
+      document.getElementById('postTitle').textContent = p.title;
+      document.getElementById('postSub').textContent = p.sub;
+      document.getElementById('postBody').innerHTML = p.body;
+
+      openModal('postModal');
+    }
+    function closePost(){ closeModal('postModal'); }
+
+    function openLegal(type){
+      const l = LEGAL[type];
+      if(!l) return;
+      document.getElementById('legalTitle').textContent = l.title;
+      document.getElementById('legalBody').innerHTML = l.body;
+      openModal('legalModal');
+    }
+    function closeLegal(){ closeModal('legalModal'); }
+
+    // click-away
+    document.addEventListener('DOMContentLoaded', function(){
+      const pm = document.getElementById('postModal');
+      const lm = document.getElementById('legalModal');
+      if(pm) pm.addEventListener('click', (e)=>{ if(e.target===pm) closePost(); });
+      if(lm) lm.addEventListener('click', (e)=>{ if(e.target===lm) closeLegal(); });
+    });
+
+    // ESC close
+    document.addEventListener('keydown', (e)=>{
+      if(e.key !== 'Escape') return;
+      const pm = document.getElementById('postModal');
+      const lm = document.getElementById('legalModal');
+      const prefs = document.querySelector('.fn-pref-backdrop');
+      if(prefs && prefs.style.display==='block') FNConsent.closePrefs();
+      if(lm && lm.style.display==='grid') closeLegal();
+      if(pm && pm.style.display==='grid') closePost();
+    });
+
+    // ----------------------------
+    // Lead capture (same endpoint pattern as index)
+    // ----------------------------
+    function validEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+
+    function getAttribution(){
+      const params = new URLSearchParams(window.location.search);
+      const pick = (k) => (params.get(k) || '').trim().slice(0, 120);
+      return {
+        utm_source: pick('utm_source'),
+        utm_medium: pick('utm_medium'),
+        utm_campaign: pick('utm_campaign'),
+        utm_content: pick('utm_content'),
+        utm_term: pick('utm_term'),
+        referrer: (document.referrer || '').slice(0, 300),
+        path: (location.pathname || '/').slice(0, 120)
+      };
+    }
+
+    async function postLead(email, source, persona){
+      try{
+        const attribution = getAttribution();
+        if (window.FN_TEST_MODE && new URLSearchParams(location.search).get('mock') === '1') {
+          await new Promise(r => setTimeout(r, 300));
+          return { ok: true, mocked: true };
+        }
+
+        const res = await fetch('/api/subscribe', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ email, source, persona, ts: Date.now(), ...attribution })
+        });
+
+        const text = await res.text();
+        let data=null;
+        try{ data = text ? JSON.parse(text) : null; }catch(_){}
+
+        if(!res.ok) return { ok:false, status: res.status, details: data || text || null };
+        if(data && typeof data === 'object') return data;
+        fnLog('postLead result', { ok: true, source, persona });
+
+        return { ok:true };
+      }catch(e){
+        return { ok:false, error:'network_error' };
+      }
+    }
+
+    function showToast(html){
+      const toast = document.getElementById('toast');
+      if(!toast) return;
+      toast.innerHTML = '<button class="toast-close" onclick="closeToast()">×</button>' + html;
+      toast.style.display = 'block';
+      setTimeout(()=>{ if(toast.style.display!=='none') toast.style.display='none'; }, 4500);
+    }
+    function closeToast(){
+      const toast = document.getElementById('toast');
+      if(toast) toast.style.display='none';
+    }
+
+    // -------------------------------
+      // Test mode (append ?test=1 to URL)
+      // -------------------------------
+      window.FN_TEST_MODE = new URLSearchParams(location.search).get('test') === '1';
+
+      function fnLog(...args) {
+        if (!window.FN_TEST_MODE) return;
+        console.log('[FN TEST]', ...args);
+      }
+
+
+    async function submitLead(e, source){
+      e.preventDefault();
+      const input = e.target.querySelector('input[type=email]');
+      const email = (input?.value || '').trim();
+      const persona = (e.target.querySelector('input[name="persona"]')?.value || 'consumer').trim() || 'consumer';
+
+      fnLog('submitLead', { source, persona, email });
+      
+      const accept = e.target.querySelector('.accept-box');
+      if(accept && !accept.checked){
+        alert('Please accept the Terms and Privacy Policy to continue.');
+        accept.focus();
+        return false;
+      }
+
+      if(!validEmail(email)){
+        alert('Please enter a valid email');
+        if(input) input.focus();
+        return false;
+      }
+      // ---- Cool-down: prevent rapid double submits (per email + source) ----
+        const CD_MS = 5000; // 5s
+        const cdKey = 'fn_submit_cd_' + source + '_' + btoa(unescape(encodeURIComponent(String(email).toLowerCase()))).slice(0, 80);
+
+        try {
+            const last = parseInt(sessionStorage.getItem(cdKey) || '0', 10);
+            if (last && (Date.now() - last) < CD_MS) {
+                const wait = Math.ceil((CD_MS - (Date.now() - last)) / 1000);
+                showToast(
+                    '<div style="font-weight:800;margin-bottom:8px">One moment</div>' +
+                    '<div style="color:#cbd5e1">Please wait ' + wait + 's before submitting again.</div>'
+                );
+                return false;
+            }
+            sessionStorage.setItem(cdKey, String(Date.now()));
+        } catch (err) {
+            // If sessionStorage is blocked, fail open (do not block submissions)
+        }
+
+
+      // UI feedback
+      const btn = e.target.querySelector('button[type="submit"]');
+      const btnLabel = btn ? btn.textContent : '';
+      if(btn){ btn.disabled=true; btn.textContent='Submitting…'; }
+
+      // optimistic toast
+      // optimistic toast + reset form (clears email + unchecks Terms)
+        try { e.target.reset(); } catch (err) { }
+
+        // extra safety: ensure terms checkbox is cleared (some browsers/forms can be quirky)
+        const acceptBox = e.target.querySelector('.accept-box');
+        if (acceptBox) acceptBox.checked = false;
+
+        showToast(
+            '<div style="font-weight:800;font-size:1.1rem;margin-bottom:10px">Welcome to FindNext</div>' +
+            '<div style="color:#cbd5e1">You’re on the waitlist. We’ll email you when FindNext launches with your first trend insights.</div>'
+        );
+
+
+      const result = await postLead(email, source, persona);
+      if(!result?.ok){
+        console.warn('Lead capture failed:', result);
+        try { sessionStorage.removeItem(cdKey); } catch (e) { }
+
+        // Keep this soft for approval—no scary error modal.
+      }
+
+      if(btn){ btn.disabled=false; btn.textContent = btnLabel || 'Join the waitlist'; }
+      return false;
+    }
+
+    // global exports
+    window.openPost = openPost;
+    window.closePost = closePost;
+    window.openLegal = openLegal;
+    window.closeLegal = closeLegal;
+    window.submitLead = submitLead;
+    window.closeToast = closeToast;
+  </script>
+</body>
+</html>
