@@ -93,7 +93,7 @@
       #0f172a 100%);
 
   background-repeat:no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 
@@ -361,7 +361,24 @@
         .activity-text {
             font-weight: 600;
         }
+.hero-wrap{
+  width: 100%;
+  min-width: 0;        /* critical for grid overflow */
+}
+.hero-main, .hero-aside, .hero-head{
+  min-width: 0;        /* critical for grid children overflow */
+}
+.hero-aside svg.thumb{
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+.hero-aside{
+  overflow: hidden;   /* belt-and-suspenders */
+}
 
+        
         /* Value Props */
         .value-props {
             display: flex;
@@ -2470,6 +2487,7 @@
 
 
 </html>
+
 
 
 
